@@ -1,0 +1,40 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      // 打开哪个目录下的 main.cpp，就构建那个目录的所有 .cpp
+      "label": "build (active folder)",
+      "type": "shell",
+      "command": "C:\\msys64\\usr\\bin\\bash.exe",
+      "args": [
+        "-lc",
+        "set -euo pipefail; d=\"${relativeFileDirname}\"; out=\"build/$d/main.exe\"; mkdir -p \"build/$d\"; shopt -s nullglob; files=(\"$d\"/*.cpp); if [ ${#files[@]} -eq 0 ]; then echo \"[ERROR] No .cpp in $d\"; exit 2; fi; echo \"[FILES]\"; for f in \"${files[@]}\"; do echo \"  $f\"; done; g++ -std=c++17 -Wall -Wextra -g -mconsole -I. -I\"$d\" \"${files[@]}\" -o \"$out\""
+      ],
+      "problemMatcher": ["$gcc"],
+      "group": { "kind": "build", "isDefault": true },
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "env": {
+          "MSYSTEM": "UCRT64",
+          "CHERE_INVOKING": "1"
+        }
+      }
+    },
+    {
+      "label": "clean (active folder)",
+      "type": "shell",
+      "command": "C:\\msys64\\usr\\bin\\bash.exe",
+      "args": [
+        "-lc",
+        "set -e; d=\"${relativeFileDirname}\"; rm -rf \"build/$d\""
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "env": {
+          "MSYSTEM": "UCRT64",
+          "CHERE_INVOKING": "1"
+        }
+      }
+    }
+  ]
+}

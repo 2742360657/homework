@@ -1,0 +1,18 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug active folder (UCRT64)",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/${relativeFileDirname}/main.exe",
+      "cwd": "${workspaceFolder}/${relativeFileDirname}",
+      "MIMode": "gdb",
+      "miDebuggerPath": "C:\\msys64\\ucrt64\\bin\\gdb.exe",
+      "externalConsole": false,
+      "stopAtEntry": false,
+      "internalConsoleOptions": "neverOpen",
+      "preLaunchTask": "build (active folder)"
+    }
+  ]
+}
