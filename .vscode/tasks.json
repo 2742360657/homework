@@ -2,8 +2,29 @@
   "version": "2.0.0",
   "tasks": [
     {
-      // 打开哪个目录下的 main.cpp，就构建那个目录的所有 .cpp
-      "label": "build (active folder)",
+      // 模式1：仅编译当前打开的 .cpp 文件
+      "label": "编译当前文件",
+      "type": "shell",
+      "command": "C:/msys64/ucrt64/bin/g++.exe",
+      "args": [
+        "-std=c++17",
+        "-Wall",
+        "-Wextra",
+        "-g",
+        "${file}",
+        "-o",
+        "${workspaceFolder}/build/main.exe",
+        "-mconsole"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": ["$gcc"],
+      "group": { "kind": "build", "isDefault": true }
+    },
+    {
+      // 模式2：编译当前目录下所有.cpp → build/<folder>/main.exe
+      "label": "编译当前文件夹",
       "type": "shell",
       "command": "C:\\msys64\\usr\\bin\\bash.exe",
       "args": [
@@ -11,7 +32,7 @@
         "set -euo pipefail; d=\"${relativeFileDirname}\"; out=\"build/$d/main.exe\"; mkdir -p \"build/$d\"; shopt -s nullglob; files=(\"$d\"/*.cpp); if [ ${#files[@]} -eq 0 ]; then echo \"[ERROR] No .cpp in $d\"; exit 2; fi; echo \"[FILES]\"; for f in \"${files[@]}\"; do echo \"  $f\"; done; g++ -std=c++17 -Wall -Wextra -g -mconsole -I. -I\"$d\" \"${files[@]}\" -o \"$out\""
       ],
       "problemMatcher": ["$gcc"],
-      "group": { "kind": "build", "isDefault": true },
+      "group": { "kind": "build", "isDefault": false },
       "options": {
         "cwd": "${workspaceFolder}",
         "env": {
@@ -21,7 +42,8 @@
       }
     },
     {
-      "label": "clean (active folder)",
+      // 清理任务：删除当前文件夹对应 build 输出
+      "label": "清理当前文件夹",
       "type": "shell",
       "command": "C:\\msys64\\usr\\bin\\bash.exe",
       "args": [
