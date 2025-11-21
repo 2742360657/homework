@@ -15,6 +15,7 @@ public:
     myStr(const char*);
     ~myStr();
     //其他可以考虑的构造函数
+    myStr::myStr();//自己加的
     myStr(const int&);
     myStr(const myStr&);
 
