@@ -15,8 +15,8 @@ public:
     myStr(const char*);
     ~myStr();
     //其他可以考虑的构造函数
-    //myStr(const int&);
-    //myStr(const myStr&);
+    myStr(const int&);
+    myStr(const myStr&);
 
     void print();
     void kmp_next();
@@ -50,8 +50,8 @@ public:
     myMatrix(const int&, const int&, const int&, const int*);
     ~myMatrix();
     //建议加入的构造函数
-    //myMatrix();
-    //myMatrix(const myMatrix&);
+    myMatrix();
+    myMatrix(const myMatrix&);
 
     void printMatrix();
     void FastTransposeSMatrix(myMatrix&);
