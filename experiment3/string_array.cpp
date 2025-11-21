@@ -71,6 +71,27 @@ myStr::myStr()
     nextVal = nullptr;
 }
 
+myStr::myStr(const int& len)
+{
+    if (len <= 0) {
+        // 长度非法或为 0，就当作空串处理
+        length = 0;
+        data = new char[1];
+        data[0] = '\0';
+    } else {
+        // 申请 len 个字符的空间，多 1 个位置存 '\0'
+        length = len;
+        data = new char[length + 1];
+
+        // 全部初始化为 '\0'，保证是一个合法的 C 字符串
+        std::memset(data, 0, static_cast<std::size_t>(length + 1));
+    }
+
+    // KMP 相关指针默认置空
+    next    = nullptr;
+    nextVal = nullptr;
+}
+
 // 已有：从 const char* 构造
 myStr::myStr(const char* s)
 {
